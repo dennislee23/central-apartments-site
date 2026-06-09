@@ -12,3 +12,5 @@
     Header set Cache-Control "max-age=300, must-revalidate"
   </FilesMatch>
 </IfModule>
+# Block the .git directory from the web
+RedirectMatch 404 /\.git
