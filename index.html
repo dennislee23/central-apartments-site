@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Central Apartments — Stay in the heart of Tallinn</title>
+<meta name="description" content="Hand-picked serviced apartments across central Tallinn. Free parking, self check-in, and a real concierge on WhatsApp. Book direct on Booking.com." />
+<meta property="og:title" content="Central Apartments — Stay in the heart of Tallinn" />
+<meta property="og:description" content="Hand-picked serviced apartments across central Tallinn. Free parking, self check-in, WhatsApp concierge." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bone:#F4EFE6; --bone-2:#EBE4D6; --ink:#1B1A17; --ink-soft:#46433C;
+    --teal:#1E5B55; --teal-deep:#143E3A; --amber:#C8743A; --line:#D8CFBE;
+    --card:#FBF8F2; --white:#fff;
+    --shadow:0 1px 2px rgba(27,26,23,.04), 0 12px 40px -16px rgba(20,62,58,.18);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bone); color:var(--ink);
+    font-family:"Hanken Grotesk",system-ui,sans-serif; font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{ /* subtle grain */
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif; font-weight:500; line-height:1.05; letter-spacing:-.01em; margin:0}
+  a{color:inherit; text-decoration:none}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px; position:relative; z-index:2}
+  .eyebrow{font-size:12.5px; letter-spacing:.22em; text-transform:uppercase; font-weight:600; color:var(--teal)}
+
+  /* Header */
+  header{position:sticky; top:0; z-index:50; backdrop-filter:blur(8px);
+    background:rgba(244,239,230,.82); border-bottom:1px solid transparent; transition:border-color .3s}
+  header.scrolled{border-color:var(--line)}
+  .nav{display:flex; align-items:center; justify-content:space-between; height:72px}
+  .brand{font-family:"Fraunces",serif; font-size:21px; font-weight:600; letter-spacing:-.02em; display:flex; align-items:center; gap:10px}
+  .brand .dot{width:9px; height:9px; border-radius:50%; background:var(--amber); display:inline-block}
+  .nav-links{display:flex; gap:30px; align-items:center; font-size:15px}
+  .nav-links a{color:var(--ink-soft); transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .btn{display:inline-flex; align-items:center; gap:9px; padding:12px 20px; border-radius:100px;
+    font-weight:600; font-size:15px; transition:transform .2s, box-shadow .2s, background .2s; cursor:pointer; border:none}
+  .btn-primary{background:var(--teal); color:#F4EFE6}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 24px -8px rgba(30,91,85,.55)}
+  .btn-ghost{background:transparent; color:var(--ink); border:1.5px solid var(--ink)}
+  .btn-ghost:hover{background:var(--ink); color:var(--bone)}
+  .btn-wa{background:#1E5B55}
+  @media(max-width:780px){ .nav-links a:not(.btn){display:none} }
+
+  /* Hero */
+  .hero{padding:90px 0 70px; position:relative; overflow:hidden}
+  .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center}
+  .hero h1{font-size:clamp(42px,6.4vw,78px)}
+  .hero h1 em{font-style:italic; color:var(--teal)}
+  .hero p.lede{font-size:19px; color:var(--ink-soft); max-width:30em; margin:26px 0 34px}
+  .hero-cta{display:flex; gap:14px; flex-wrap:wrap}
+  .hero-photo{position:relative; aspect-ratio:4/5; box-shadow:var(--shadow); border-radius:18px}
+  .hero-photo img{width:100%; height:100%; object-fit:cover; border-radius:18px; display:block}
+  .hero-badge{position:absolute; left:-22px; bottom:28px; background:var(--card); border:1px solid var(--line);
+    border-radius:14px; padding:14px 18px; box-shadow:var(--shadow); max-width:200px}
+  .hero-badge b{font-family:"Fraunces",serif; font-size:26px; display:block; line-height:1}
+  .hero-badge span{font-size:13px; color:var(--ink-soft)}
+  @media(max-width:880px){ .hero-grid{grid-template-columns:1fr; gap:38px} .hero-photo{max-width:420px} .hero-badge{left:auto; right:18px} }
+
+  /* Trust strip */
+  .strip{border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--bone-2)}
+  .strip-in{display:grid; grid-template-columns:repeat(4,1fr); gap:24px; padding:26px 0}
+  .strip-item{display:flex; gap:13px; align-items:flex-start; font-size:14.5px}
+  .strip-item svg{flex:0 0 auto; margin-top:2px; color:var(--teal)}
+  .strip-item b{display:block; font-family:"Fraunces",serif; font-size:16px; font-weight:600}
+  .strip-item span{color:var(--ink-soft)}
+  @media(max-width:780px){ .strip-in{grid-template-columns:1fr 1fr; gap:20px} }
+
+  /* Section */
+  section{padding:84px 0}
+  .sec-head{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:42px}
+  .sec-head h2{font-size:clamp(30px,4vw,46px); max-width:14em}
+  .sec-head p{color:var(--ink-soft); max-width:26em; margin:10px 0 0}
+
+  /* Apartment grid */
+  .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:30px}
+  @media(max-width:760px){ .grid{grid-template-columns:1fr} }
+  .card{background:var(--card); border:1px solid var(--line); border-radius:18px; overflow:hidden;
+    display:flex; flex-direction:column; box-shadow:var(--shadow); transition:transform .3s ease, box-shadow .3s}
+  .card:hover{transform:translateY(-5px); box-shadow:0 24px 50px -22px rgba(20,62,58,.32)}
+  .card-photo{position:relative; aspect-ratio:16/11; overflow:hidden; background:var(--bone-2)}
+  .card-photo img{width:100%; height:100%; object-fit:cover; transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+  .card:hover .card-photo img{transform:scale(1.06)}
+  .card-tag{position:absolute; top:14px; left:14px; background:rgba(244,239,230,.92); backdrop-filter:blur(4px);
+    color:var(--teal-deep); font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    padding:7px 13px; border-radius:100px}
+  .card-body{padding:24px 24px 26px; display:flex; flex-direction:column; flex:1}
+  .card-body h3{font-size:24px; margin-bottom:8px}
+  .card-body .blurb{color:var(--ink-soft); font-size:15px; margin:0 0 18px}
+  .specs{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px}
+  .spec{font-size:13px; font-weight:500; color:var(--ink-soft); background:var(--bone-2);
+    border:1px solid var(--line); padding:6px 12px; border-radius:8px; display:inline-flex; align-items:center; gap:6px}
+  .card-foot{margin-top:auto; display:flex; gap:10px; align-items:center}
+  .card-foot .btn{flex:1; justify-content:center}
+  .link-wa{font-size:14px; color:var(--teal); font-weight:600; white-space:nowrap; padding:12px 6px}
+  .link-wa:hover{text-decoration:underline}
+
+  /* Difference */
+  .diff{background:var(--teal-deep); color:#EAE4D6}
+  .diff .eyebrow{color:var(--amber)}
+  .diff h2{color:#fff}
+  .diff-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:34px; margin-top:46px}
+  .diff-item h3{font-size:21px; color:#fff; margin-bottom:10px; display:flex; align-items:center; gap:11px}
+  .diff-item p{color:rgba(234,228,214,.72); font-size:15.5px; margin:0}
+  .diff-num{font-family:"Fraunces",serif; font-style:italic; color:var(--amber); font-size:19px}
+  @media(max-width:780px){ .diff-grid{grid-template-columns:1fr; gap:28px} }
+
+  /* CTA band */
+  .band{text-align:center; background:var(--bone-2); border-top:1px solid var(--line)}
+  .band h2{font-size:clamp(30px,4.4vw,52px); max-width:16em; margin:0 auto 18px}
+  .band p{color:var(--ink-soft); max-width:34em; margin:0 auto 30px; font-size:18px}
+  .band .hero-cta{justify-content:center}
+
+  /* Footer */
+  footer{background:var(--ink); color:#CFC9BC; padding:64px 0 36px}
+  .foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; padding-bottom:42px; border-bottom:1px solid #34322C}
+  footer .brand{color:#fff; font-size:24px; margin-bottom:14px}
+  footer p{font-size:14.5px; color:#9D978A; max-width:26em; margin:0}
+  .foot-col h4{font-family:"Hanken Grotesk"; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:#7C766A; margin:0 0 16px; font-weight:700}
+  .foot-col a, .foot-col div{display:block; color:#CFC9BC; font-size:15px; margin-bottom:11px; transition:color .2s}
+  .foot-col a:hover{color:var(--amber)}
+  .foot-bottom{display:flex; justify-content:space-between; padding-top:26px; font-size:13px; color:#7C766A; flex-wrap:wrap; gap:10px}
+  @media(max-width:780px){ .foot-grid{grid-template-columns:1fr; gap:30px} }
+
+  /* reveal */
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease}
+  .reveal.in{opacity:1; transform:none}
+
+  /* Floating WhatsApp */
+  .fab{position:fixed; right:22px; bottom:22px; z-index:60; width:58px; height:58px; border-radius:50%;
+    background:#25D366; display:grid; place-items:center; box-shadow:0 10px 30px -6px rgba(0,0,0,.35); transition:transform .2s}
+  .fab:hover{transform:scale(1.08)}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="brand" href="#top"><span class="dot"></span>Central Apartments</a>
+    <nav class="nav-links">
+      <a href="#stays">Stays</a>
+      <a href="#difference">Why us</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn-primary" href="#stays">Book a stay</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="reveal in">
+        <div class="eyebrow">Tallinn · Estonia</div>
+        <h1 style="margin-top:18px">Your own corner of <em>Tallinn</em>, done properly.</h1>
+        <p class="lede">A small collection of hand-finished apartments in the city's best streets — from Kadriorg's parks to the Rotermann waterfront. Free parking, keyless self check-in, and a real person on WhatsApp whenever you need one.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#stays">Explore the apartments</a>
+          <a class="btn btn-ghost" href="https://wa.me/37253829955?text=Hi%20Central%20Apartments%2C%20I%27d%20like%20to%20ask%20about%20a%20stay" target="_blank" rel="noopener">Chat on WhatsApp</a>
+        </div>
+      </div>
+      <div class="reveal in" style="transition-delay:.12s">
+        <div class="hero-photo">
+          <img src="img/tallinn-hero.jpg" alt="Tallinn Old Town skyline, Estonia" loading="eager" />
+          <div class="hero-badge">
+            <b>5★</b><span>Self check-in, 24/7 — arrive on your schedule, not ours.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div class="strip">
+    <div class="wrap strip-in">
+      <div class="strip-item"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="16" height="11" rx="2"/><path d="M3 10h16"/></svg><div><b>Free parking</b><span>On-site at every apartment</span></div></div>
+      <div class="strip-item"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="10" width="12" height="9" rx="2"/><path d="M7.5 10V7.5a3.5 3.5 0 0 1 7 0V10"/></svg><div><b>Keyless entry</b><span>Self check-in any hour</span></div></div>
+      <div class="strip-item"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M11 3C7 3 4 6 4 9.5c0 4 7 9.5 7 9.5s7-5.5 7-9.5C18 6 15 3 11 3Z"/><circle cx="11" cy="9.5" r="2.2"/></svg><div><b>Central locations</b><span>Walk to everything</span></div></div>
+      <div class="strip-item"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h14v10H9l-4 3V5Z"/></svg><div><b>WhatsApp concierge</b><span>Real answers, fast</span></div></div>
+    </div>
+  </div>
+
+  <!-- STAYS -->
+  <section id="stays">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <div class="eyebrow">The collection</div>
+          <h2 style="margin-top:14px">Ten apartments across central Tallinn.</h2>
+        </div>
+        <p>All booked and managed directly by us — real photos, honest descriptions, and free parking at every door.</p>
+      </div>
+      <div class="grid" id="aptGrid"></div>
+      <p class="reveal" style="text-align:center; color:var(--ink-soft); margin-top:40px; font-size:15px">Looking for something specific? <a href="https://wa.me/37253829955" target="_blank" rel="noopener" style="color:var(--teal); font-weight:600">Ask us on WhatsApp</a> — we have more across Tallinn.</p>
+    </div>
+  </section>
+
+  <!-- DIFFERENCE -->
+  <section id="difference" class="diff">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow">Why Central Apartments</div>
+        <h2 style="margin-top:14px; max-width:13em">The polish of a hotel, the space of a home.</h2>
+      </div>
+      <div class="diff-grid">
+        <div class="diff-item reveal"><h3><span class="diff-num">01</span> Arrive anytime</h3><p>Keyless self check-in at every apartment. Late flight, early train — your door is ready when you are, no front desk to catch.</p></div>
+        <div class="diff-item reveal" style="transition-delay:.1s"><h3><span class="diff-num">02</span> Park for free</h3><p>Every stay includes a dedicated parking spot — underground, garage or gated courtyard. A rare thing in a Baltic capital.</p></div>
+        <div class="diff-item reveal" style="transition-delay:.2s"><h3><span class="diff-num">03</span> A concierge that replies</h3><p>Message us on WhatsApp for the Wi-Fi code, a parking question or a dinner tip. You'll hear back in minutes, in your language.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="band" id="contact">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow">Book direct</div>
+        <h2 style="margin-top:16px">Find your dates and settle in.</h2>
+        <p>Reserve securely on Booking.com, or message us directly — we'll help you pick the right apartment for your trip.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#stays">See apartments</a>
+          <a class="btn btn-ghost" href="https://wa.me/37253829955?text=Hi%20Central%20Apartments%2C%20I%27d%20like%20to%20book%20a%20stay" target="_blank" rel="noopener">WhatsApp +372 5382 9955</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand"><span class="dot" style="background:var(--amber)"></span>Central Apartments</div>
+        <p>Hand-finished serviced apartments across central Tallinn. Stay in the heart of the city, with the comforts of home.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Get in touch</h4>
+        <a href="https://wa.me/37253829955" target="_blank" rel="noopener">WhatsApp · +372 5382 9955</a>
+        <a href="mailto:info@centralapartments.ee">info@centralapartments.ee</a>
+        <div>Tallinn, Estonia</div>
+      </div>
+      <div class="foot-col">
+        <h4>Stays</h4>
+        <a href="#stays">Kadriorg · 4-bedroom</a>
+        <a href="#stays">Rotermann · Penthouse</a>
+        <a href="#stays">City Centre · DasHaus</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Central Apartments. All rights reserved.</span>
+      <span>Skyline photo: William John Gauthier, <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline">CC BY-SA 2.0</a></span>
+    </div>
+  </div>
+</footer>
+
+<a class="fab" href="https://wa.me/37253829955?text=Hi%20Central%20Apartments" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.8.7.8-2.7-.2-.3A8 8 0 1 1 12 20Zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 0 1-1.9-1.2 7.3 7.3 0 0 1-1.4-1.7c-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4 0-.2 0-.3-.1-.4l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4 0-.6.3a2.7 2.7 0 0 0-.8 2c0 1.2.8 2.3 1 2.5.1.2 1.7 2.7 4.2 3.7 1.5.6 2 .7 2.7.6.4-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1 0-.1-.2-.2-.4-.3Z"/></svg>
+</a>
+
+<script>
+  // ---- Apartment data (sourced from the operations DB; marketing-safe fields only) ----
+  // booking: real Booking.com property URL. TODO: replace search fallbacks with the
+  // exact per-listing URLs from Aleksei (only Lootsi Penthouse confirmed so far).
+  const APARTMENTS = [
+    {
+      name:"Central Lootsi Penthouse",
+      tag:"Rotermann · Waterfront",
+      photo:"img/cat/central-lootsi-penthouse/2.jpg",
+      blurb:"Penthouse in Rotermann, central Tallinn.",
+      specs:["Sleeps 8","Penthouse","Self check-in"],
+      booking:"https://www.booking.com/hotel/ee/central-lootsi-penthouse.html"
+    },
+    {
+      name:"4-Bedroom Modern · Kadriorg",
+      tag:"Kadriorg",
+      photo:"img/cat/4bdr-modern-and-stylish-apartment-/0.jpg",
+      blurb:"4 bedrooms in Kadriorg, central Tallinn.",
+      specs:["Sleeps 8","4 bedrooms","Free parking"],
+      booking:"https://www.booking.com/hotel/ee/4bdr-modern-and-stylish-apartment-near-kadriorg-with-free-parking.html"
+    },
+    {
+      name:"DasHaus 2 bedroom Apartment",
+      tag:"City Centre",
+      photo:"img/cat/dashaus-2-bedroom-apartment/0.jpg",
+      blurb:"In City Centre — a 10-minute walk from Maiden Tower.",
+      specs:["Sleeps 5","2 bedrooms","Self check-in"],
+      booking:"https://www.booking.com/hotel/ee/dashaus-2-bedroom-apartment.html"
+    },
+    {
+      name:"Kadriorg Plaza · 2-Bedroom",
+      tag:"Kadriorg",
+      photo:"img/cat/kadriorg-plaza/3.jpg",
+      blurb:"2 bedrooms in Kadriorg, central Tallinn.",
+      specs:["Sleeps 5","2 bedrooms","Free parking"],
+      booking:"https://www.booking.com/hotel/ee/kadriorg-plaza.html"
+    },
+    {
+      name:"Viru 2-Bedroom with Parking",
+      tag:"Old Town edge",
+      photo:"img/cat/new-chic-2-bed-at-viru-by-centrala/2.jpg",
+      blurb:"In Old Town edge — a 6-minute walk from Estonian National Opera.",
+      specs:["Sleeps 6","2 bedrooms","Free parking"],
+      booking:"https://www.booking.com/hotel/ee/new-chic-2-bed-at-viru-by-centralapartments.html"
+    },
+    {
+      name:"Lootsi 3a · Nordic Style",
+      tag:"Rotermann · Waterfront",
+      photo:"img/cat/lootsi-3a-nordic-style-with-sauna-/0.jpg",
+      blurb:"In Rotermann — a 14-minute walk from Estonian National Opera.",
+      specs:["Sleeps 4","Apartment","Free parking"],
+      booking:"https://www.booking.com/hotel/ee/lootsi-3a-nordic-style-with-sauna-and-garage.html"
+    },
+    {
+      name:"Artius City-Centre Apartment",
+      tag:"City Centre",
+      photo:"img/cat/foorum-city-centre-apartment/1.jpg",
+      blurb:"In City Centre — a 19-minute walk from Kalarand.",
+      specs:["Sleeps 5","Apartment","Self check-in"],
+      booking:"https://www.booking.com/hotel/ee/foorum-city-centre-apartment.html"
+    },
+    {
+      name:"Karu Central Apartment",
+      tag:"Kadriorg",
+      photo:"img/cat/karu-central-apartment/3.jpg",
+      blurb:"In Kadriorg — a 19-minute walk from Kadriorg Palace.",
+      specs:["Sleeps 4","Apartment","Self check-in"],
+      booking:"https://www.booking.com/hotel/ee/karu-central-apartment.html"
+    },
+    {
+      name:"Stylish Telliskivi Apartment",
+      tag:"Telliskivi",
+      photo:"img/cat/stylish-apartment-with-parking-in-/0.jpg",
+      blurb:"In Telliskivi — a 11-minute walk from Town Hall Square.",
+      specs:["Sleeps 4","Apartment","Free parking"],
+      booking:"https://www.booking.com/hotel/ee/stylish-apartment-with-parking-in-telliskivi.html"
+    },
+    {
+      name:"Viru Lux Apartment",
+      tag:"Old Town edge",
+      photo:"img/cat/viru-valjak-lux-apartment/3.jpg",
+      blurb:"In Old Town edge — a 8-minute walk from Tallinn Town Hall.",
+      specs:["Sleeps 4","Apartment","Self check-in"],
+      booking:"https://www.booking.com/hotel/ee/viru-valjak-lux-apartment.html"
+    }
+  ];
+
+  const waBase = "https://wa.me/37253829955?text=";
+  const grid = document.getElementById('aptGrid');
+  grid.innerHTML = APARTMENTS.map((a,i)=>`
+    <article class="card reveal" style="transition-delay:${(i%2)*0.08}s">
+      <div class="card-photo"><img src="${a.photo}" alt="${a.name}, Tallinn" loading="lazy" /><span class="card-tag">${a.tag}</span></div>
+      <div class="card-body">
+        <h3>${a.name}</h3>
+        <p class="blurb">${a.blurb}</p>
+        <div class="specs">${a.specs.map(s=>`<span class="spec">${s}</span>`).join('')}</div>
+        <div class="card-foot">
+          <a class="btn btn-primary" href="${a.booking}" target="_blank" rel="noopener">Book on Booking.com</a>
+          <a class="link-wa" href="${waBase+encodeURIComponent('Hi Central Apartments, I am interested in the '+a.name)}" target="_blank" rel="noopener">Ask us →</a>
+        </div>
+      </div>
+    </article>`).join('');
+
+  // Header shadow on scroll
+  const hdr=document.getElementById('hdr');
+  addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>10));
+
+  // Reveal on scroll
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
