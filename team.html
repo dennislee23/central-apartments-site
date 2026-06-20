@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Central Apartments — гайд команды</title>
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bone:#F4EFE6; --bone-2:#EBE4D6; --ink:#1B1A17; --ink-soft:#46433C;
+    --teal:#1E5B55; --teal-deep:#143E3A; --amber:#C8743A; --line:#D8CFBE;
+    --card:#FBF8F2; --white:#fff; --green:#25855A;
+    --shadow:0 1px 2px rgba(27,26,23,.04), 0 12px 40px -16px rgba(20,62,58,.18);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bone); color:var(--ink);
+    font-family:"Hanken Grotesk",system-ui,sans-serif; font-size:17px; line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  h1,h2,h3,h4{font-family:"Fraunces",Georgia,serif; font-weight:500; line-height:1.1; letter-spacing:-.01em; margin:0}
+  a{color:var(--teal); text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1140px; margin:0 auto; padding:0 28px; position:relative; z-index:2}
+  .eyebrow{font-size:12.5px; letter-spacing:.22em; text-transform:uppercase; font-weight:600; color:var(--teal)}
+
+  /* Header */
+  header{position:sticky; top:0; z-index:50; backdrop-filter:blur(8px);
+    background:rgba(244,239,230,.85); border-bottom:1px solid var(--line)}
+  .nav{display:flex; align-items:center; justify-content:space-between; height:68px}
+  .brand{font-family:"Fraunces",serif; font-size:20px; font-weight:600; letter-spacing:-.02em; display:flex; align-items:center; gap:10px; color:var(--ink)}
+  .brand .logo{width:28px; height:28px; border-radius:7px; display:inline-block; object-fit:cover}
+  .brand small{font-family:"Hanken Grotesk"; font-weight:600; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); padding:4px 9px; border:1px solid var(--line); border-radius:100px; background:var(--card)}
+  .nav a.home{font-size:14px; color:var(--ink-soft)}
+
+  /* Hero */
+  .hero{padding:60px 0 34px}
+  .hero h1{font-size:clamp(36px,5.4vw,60px)}
+  .hero h1 em{font-style:italic; color:var(--teal)}
+  .hero p.lede{font-size:19px; color:var(--ink-soft); max-width:38em; margin:22px 0 0}
+
+  /* Layout: TOC + content */
+  .layout{display:grid; grid-template-columns:230px 1fr; gap:54px; padding:18px 0 90px; align-items:start}
+  nav.toc{position:sticky; top:92px}
+  nav.toc .toc-h{font-size:11.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft); font-weight:700; margin:0 0 14px}
+  nav.toc ol{list-style:none; margin:0; padding:0; counter-reset:toc}
+  nav.toc li{counter-increment:toc; margin:0 0 3px}
+  nav.toc a{display:flex; gap:10px; padding:7px 11px; border-radius:9px; color:var(--ink-soft); font-size:14.5px; line-height:1.35; transition:background .15s, color .15s}
+  nav.toc a::before{content:counter(toc); font-family:"Fraunces",serif; font-style:italic; color:var(--amber); font-size:14px; flex:0 0 auto}
+  nav.toc a:hover{background:var(--bone-2); color:var(--ink); text-decoration:none}
+  nav.toc a.active{background:var(--teal); color:#F4EFE6}
+  nav.toc a.active::before{color:#F4EFE6}
+  @media(max-width:860px){ .layout{grid-template-columns:1fr; gap:0} nav.toc{display:none} }
+
+  /* Content */
+  .content{max-width:720px}
+  .content section{padding:38px 0; border-top:1px solid var(--line)}
+  .content section:first-child{border-top:none; padding-top:8px}
+  .content h2{font-size:clamp(26px,3.4vw,36px); display:flex; align-items:baseline; gap:14px; margin-bottom:8px; scroll-margin-top:90px}
+  .content h2 .num{font-family:"Fraunces",serif; font-style:italic; font-size:.62em; color:var(--amber); flex:0 0 auto}
+  .content h3{font-size:20px; margin:30px 0 8px; color:var(--teal-deep)}
+  .content p{margin:14px 0}
+  .content ul,.content ol{margin:14px 0; padding-left:22px}
+  .content li{margin:9px 0}
+  .content li::marker{color:var(--teal)}
+  .lead{font-size:18.5px; color:var(--ink-soft); margin-top:6px}
+  strong{font-weight:700}
+  code{font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:.88em; background:var(--bone-2);
+    border:1px solid var(--line); border-radius:6px; padding:2px 6px; color:var(--teal-deep)}
+  .kbd{font-family:ui-monospace,Menlo,monospace; font-size:.82em; background:var(--white); border:1px solid var(--line);
+    border-bottom-width:2px; border-radius:6px; padding:2px 7px; color:var(--ink)}
+
+  /* Callouts */
+  .box{border-radius:14px; padding:18px 20px; margin:20px 0; border:1px solid var(--line); background:var(--card); box-shadow:var(--shadow)}
+  .box p:first-child{margin-top:0} .box p:last-child{margin-bottom:0}
+  .box.tip{border-left:4px solid var(--teal)}
+  .box.warn{border-left:4px solid var(--amber); background:#FBF3EA}
+  .box.key{background:var(--teal-deep); color:#EAE4D6; border-color:var(--teal-deep)}
+  .box.key b, .box.key strong{color:#fff}
+  .box.key code{background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.18); color:#fff}
+  .box .label{font-size:12px; letter-spacing:.12em; text-transform:uppercase; font-weight:700; color:var(--teal); display:block; margin-bottom:6px}
+  .box.warn .label{color:var(--amber)}
+  .box.key .label{color:#8FD3C9}
+
+  /* Steps */
+  ol.steps{counter-reset:st; list-style:none; padding:0; margin:18px 0}
+  ol.steps>li{counter-increment:st; position:relative; padding:0 0 18px 50px; margin:0}
+  ol.steps>li::before{content:counter(st); position:absolute; left:0; top:-2px; width:32px; height:32px; border-radius:50%;
+    background:var(--teal); color:#F4EFE6; font-family:"Fraunces",serif; font-size:16px; display:grid; place-items:center}
+  ol.steps>li::after{content:""; position:absolute; left:15px; top:34px; bottom:2px; width:2px; background:var(--line)}
+  ol.steps>li:last-child{padding-bottom:0}
+  ol.steps>li:last-child::after{display:none}
+  ol.steps>li b{font-weight:700}
+
+  /* Chat mock */
+  .chat{background:var(--bone-2); border:1px solid var(--line); border-radius:16px; padding:16px; margin:20px 0; display:flex; flex-direction:column; gap:9px}
+  .chat .row{display:flex}
+  .chat .row.out{justify-content:flex-end}
+  .bub{max-width:82%; padding:10px 14px; border-radius:14px; font-size:15px; line-height:1.45; box-shadow:0 1px 1px rgba(0,0,0,.04)}
+  .bub.guest{background:var(--white); border:1px solid var(--line); border-bottom-left-radius:4px}
+  .bub.mgr{background:#DCF3E6; border:1px solid #Bfe6cf; border-bottom-right-radius:4px}
+  .bub.bot{background:#E4EFEE; border:1px solid #cfe0de; border-bottom-left-radius:4px}
+  .bub .who{display:block; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; margin-bottom:3px; opacity:.7}
+  .card-mock{background:var(--white); border:1px solid var(--line); border-radius:12px; padding:14px 16px; font-size:14.5px; line-height:1.5; margin:18px 0; box-shadow:var(--shadow)}
+  .card-mock .ttl{font-weight:700; color:var(--amber); margin-bottom:6px}
+  .card-mock .fld{display:flex; gap:8px; margin:3px 0}
+  .card-mock .fld span:first-child{color:var(--ink-soft); min-width:148px}
+
+  /* Quick ref table */
+  table{width:100%; border-collapse:collapse; margin:18px 0; font-size:15px}
+  th,td{text-align:left; padding:11px 12px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{font-family:"Hanken Grotesk"; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); font-weight:700}
+  td code{white-space:nowrap}
+
+  footer{background:var(--ink); color:#9D978A; padding:40px 0; font-size:13.5px}
+  footer .wrap{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
+  footer b{color:#CFC9BC; font-family:"Fraunces",serif; font-weight:500}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <span class="brand"><img class="logo" src="img/logo.png" alt="" />Central Apartments <small>Гайд команды</small></span>
+    <a class="home" href="index.html">← на сайт</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div class="eyebrow">Внутренняя инструкция · только для команды</div>
+    <h1 style="margin-top:16px">Как работает <em>Roland</em> и что делаете вы.</h1>
+    <p class="lede">Roland — наш ассистент в WhatsApp. Он сам отвечает гостям на любом языке: заселение, Wi-Fi, парковка, локбокс, фото. Ваша задача — подключаться там, где нужен человек. Эта страница объясняет всю систему простыми словами. Держите её под рукой.</p>
+  </div>
+
+  <div class="wrap layout">
+    <nav class="toc" aria-label="Содержание">
+      <p class="toc-h">Содержание</p>
+      <ol>
+        <li><a href="#flow">Путь гостя</a></li>
+        <li><a href="#bot">Что бот делает сам</a></li>
+        <li><a href="#telegram">Петля менеджера в Telegram</a></li>
+        <li><a href="#reply">Как ответить гостю</a></li>
+        <li><a href="#note">Заметки боту — /note</a></li>
+        <li><a href="#human">Когда нужен человек</a></li>
+        <li><a href="#booking">Шаблоны Booking</a></li>
+        <li><a href="#cheat">Шпаргалка</a></li>
+      </ol>
+    </nav>
+
+    <div class="content">
+
+      <!-- 1 -->
+      <section id="flow">
+        <h2><span class="num">01</span> Путь гостя</h2>
+        <p class="lead">Гость бронирует на Booking.com — и мягко переходит к Roland в WhatsApp. Каналы разведены так, чтобы гость <strong>не получал одно и то же дважды</strong>.</p>
+        <ol class="steps">
+          <li><b>Гость бронирует на Booking.com.</b> Бронь автоматически попадает в нашу систему (Beds24) вместе с реальным телефоном и квартирой.</li>
+          <li><b>Booking сам шлёт подтверждение брони.</b> Это делает Booking, не мы.</li>
+          <li><b>Сразу после брони</b> от нашего имени уходит приветственное письмо в Booking (6 языков). Оно <strong>зовёт гостя в WhatsApp</strong> (<code>wa.me/37257833881</code>) и просит время заезда и номер машины. Деталей заселения тут нет — только переход в чат.</li>
+          <li><b>Примерно за 14 дней до заезда</b> Roland сам пишет гостю в WhatsApp приветствие на его языке. Только по квартирам, где есть все фото заселения, и только если гость ещё сам не написал (чтобы не задвоить).</li>
+          <li><b>Гость общается с Roland</b> в WhatsApp на любом языке: заселение, Wi-Fi, парковка, локбокс, фото. Бот отвечает данными именно его квартиры.</li>
+          <li><b>За 1 день до выезда</b> Booking сам шлёт просьбу оставить отзыв (6 языков).</li>
+        </ol>
+        <div class="box tip">
+          <span class="label">Коротко</span>
+          <p>Booking приводит гостя → Roland ведёт его в WhatsApp и отвечает на всё типовое → вы вступаете только когда что-то нестандартное.</p>
+        </div>
+      </section>
+
+      <!-- 2 -->
+      <section id="bot">
+        <h2><span class="num">02</span> Что бот делает сам</h2>
+        <p>По типовым вопросам человек не нужен — Roland закрывает их сам, круглосуточно, на языке гостя:</p>
+        <ul>
+          <li>Инструкция по <strong>заселению</strong>, код локбокса, как попасть в дом и подъезд;</li>
+          <li><strong>Wi-Fi</strong> (сеть и пароль), <strong>парковка</strong>, как пользоваться квартирой;</li>
+          <li><strong>Фото</strong> дома, подъезда, локбокса, парковки — по запросу;</li>
+          <li>Время заезда/выезда, адрес, район, базовые советы по городу;</li>
+          <li>Отвечает <strong>на любом языке</strong> — определяет язык гостя сам.</li>
+        </ul>
+        <div class="chat">
+          <div class="row"><div class="bub guest"><span class="who">Гость</span>What's the wifi password?</div></div>
+          <div class="row out"><div class="bub bot"><span class="who">Roland</span>The Wi-Fi network is <b>Telia-9124F2</b>, password <b>6nbnM9ndThL</b>. Enjoy your stay! 🙂</div></div>
+        </div>
+        <p>Каждый диалог дублируется в группу Telegram, чтобы вы видели, что происходит — вмешиваться при этом не нужно.</p>
+      </section>
+
+      <!-- 3 -->
+      <section id="telegram">
+        <h2><span class="num">03</span> Петля менеджера в Telegram</h2>
+        <p class="lead">Вся переписка с гостями зеркалится в группу <strong>«Roland — Central Apartments»</strong> в Telegram. Это ваш рабочий экран.</p>
+        <p>Когда вопрос выходит за рамки бота, приходит жалоба или присылают не-текст — бот <strong>эскалирует</strong>: ставит себя на паузу по этому гостю и публикует <strong>🚨 карточку</strong>. В карточке всё, что нужно, чтобы понять, кто это:</p>
+        <div class="card-mock">
+          <div class="ttl">🚨 Эскалация · приоритет высокий</div>
+          <div class="fld"><span>Гость:</span><span>Enrique (Перу)</span></div>
+          <div class="fld"><span>WhatsApp гостя:</span><span>+51 …</span></div>
+          <div class="fld"><span>Бронь Booking.com:</span><span>6538679883</span></div>
+          <div class="fld"><span>Квартира:</span><span>Viru Väljak 6-19 · 25–29 июня</span></div>
+          <div class="fld"><span>📝 Заметки:</span><span>выезд 29 июня (не 28), доплата наличными</span></div>
+          <div class="fld"><span>Суть (RU):</span><span>Гость просит поздний выезд и переживает за оплату.</span></div>
+        </div>
+        <ul>
+          <li><strong>Имя гостя</strong>, его <strong>номер WhatsApp</strong>, <strong>номер брони Booking</strong>, квартира и даты;</li>
+          <li><strong>суть на русском</strong> — даже если гость писал по-испански, вы поймёте;</li>
+          <li>📝 <strong>заметки команды</strong>, если они есть (см. раздел 5);</li>
+          <li>бот <strong>замолкает</strong> по этому гостю и шлёт «звонок в дверь» — WhatsApp-уведомление на <strong>+372 5559 8010</strong> (потому что Telegram открыт не у всех постоянно).</li>
+        </ul>
+        <div class="box warn">
+          <span class="label">Важно — как искать бронь</span>
+          <p>Ищите бронь в Booking по <strong>номеру брони</strong> (например <code>6538679883</code>) или по имени гостя. <strong>Никогда не ищите по номеру WhatsApp.</strong> Внутренний номер бота — это не номер брони гостя.</p>
+        </div>
+      </section>
+
+      <!-- 4 -->
+      <section id="reply">
+        <h2><span class="num">04</span> Как ответить гостю</h2>
+        <p class="lead">Отвечать гостю можно <strong>по-русски</strong> (или по-эстонски/английски) — Roland сам переведёт на язык гостя и отправит в WhatsApp.</p>
+        <ol class="steps">
+          <li><b>Сделайте свайп-reply</b> на сообщение гостя или на карточку в группе Telegram (потяните сообщение вправо → «Ответить»).</li>
+          <li><b>Напишите ответ на удобном вам языке</b> — RU / ET / EN. Бот переведёт его на язык гостя и отправит в WhatsApp. В подтверждении он покажет, что именно ушло гостю.</li>
+          <li><b>Пока вы ведёте гостя, бот молчит</b> по нему. Когда вопрос решён — нажмите кнопку <span class="kbd">▶️ Вернуть бота</span> под карточкой, чтобы Roland снова отвечал сам. Если забыли — бот вернётся автоматически через 24 часа.</li>
+        </ol>
+        <div class="chat">
+          <div class="row"><div class="bub guest"><span class="who">Гость (в WhatsApp)</span>Can I check out a bit later, around 13:00?</div></div>
+          <div class="row out"><div class="bub mgr"><span class="who">Вы (свайп-reply в Telegram)</span>Да, поздний выезд до 13:00 не проблема 🙂</div></div>
+          <div class="row out"><div class="bub bot"><span class="who">Roland → гостю</span>Yes, a late checkout until 13:00 is no problem 🙂</div></div>
+        </div>
+        <div class="box tip">
+          <span class="label">Запомнить</span>
+          <p>Отвечаете <strong>свайпом</strong> в Telegram, пишете <strong>по-русски</strong>, в конце <strong>«Вернуть бота»</strong>. Гость видит ответ на своём языке — он не знает, что переписывается с переводом.</p>
+        </div>
+      </section>
+
+      <!-- 5 -->
+      <section id="note">
+        <h2><span class="num">05</span> Заметки боту — <code>/note</code></h2>
+        <p class="lead">Если есть отклонение от брони, которого нет в системе — скажите об этом боту заметкой. Дальше он сам будет это учитывать в разговоре с гостем.</p>
+        <p>Примеры: гость остаётся на лишнюю ночь за наличные; согласован ранний заезд; особая просьба; смена даты выезда.</p>
+        <ol class="steps">
+          <li><b>Свайп-reply на карточку гостя</b> в группе Telegram.</li>
+          <li><b>Напишите команду:</b> <code>/note текст заметки</code>.</li>
+        </ol>
+        <div class="chat">
+          <div class="row out"><div class="bub mgr"><span class="who">Вы (свайп-reply на карточку)</span>/note выезд в понедельник 29-го, не 28-го; доплата за ночь наличными</div></div>
+        </div>
+        <p>Что происходит дальше:</p>
+        <ul>
+          <li>Бот сохраняет заметку <strong>привязанной к этому гостю</strong> (ежечасная синхронизация её не затирает);</li>
+          <li>заметка <strong>главнее данных брони</strong> — теперь на вопрос о выезде Roland ответит «29 июня», а не «28»;</li>
+          <li>заметки видны в карточках гостя (📝) и <strong>накапливаются</strong>;</li>
+          <li>это внутренняя информация — бот не зачитывает её гостю как системное сообщение.</li>
+        </ul>
+        <div class="box warn">
+          <span class="label">Помните</span>
+          <p>Если договорённость с гостем не записать через <code>/note</code>, бот о ней не знает и будет отвечать по данным Booking. Меняется дата, цена, условие — оставьте заметку.</p>
+        </div>
+      </section>
+
+      <!-- 6 -->
+      <section id="human">
+        <h2><span class="num">06</span> Когда нужен человек</h2>
+        <p>Бот хорош в типовых вопросах, но он <strong>не всё знает и не всё решает</strong>. Подключайтесь, когда видите эскалацию или одну из ситуаций ниже:</p>
+        <ul>
+          <li><strong>Деньги и бронь:</strong> цена, скидка, доплата, возврат, продление, изменение дат, прямое бронирование;</li>
+          <li><strong>Проблемы в квартире:</strong> поломка, уборка, нет горячей воды, отопление, шум — всё, что требует физического действия;</li>
+          <li><strong>Доступ:</strong> гость не может попасть внутрь, не работает локбокс/код;</li>
+          <li><strong>Жалобы и расстроенный гость</strong> — бот эскалирует сам, но дальше нужен живой ответ и решение;</li>
+          <li><strong>Чего бот может не знать:</strong> Wi-Fi у части квартир, нестандартные договорённости, всё чего нет в Booking и в заметках;</li>
+          <li><strong>Не-текст:</strong> гость прислал фото/голосовое/документ.</li>
+        </ul>
+        <div class="box tip">
+          <span class="label">Правило большого пальца</span>
+          <p>Если бот эскалировал (🚨 в Telegram) — гостем уже занимаетесь вы, пока не нажмёте «Вернуть бота». Если сомневаетесь, бот ли должен отвечать — лучше ответить самому.</p>
+        </div>
+      </section>
+
+      <!-- 7 -->
+      <section id="booking">
+        <h2><span class="num">07</span> Шаблоны Booking <span style="font-size:14px; color:var(--ink-soft); font-style:normal; font-family:'Hanken Grotesk'">(справочно)</span></h2>
+        <p class="lead">Это для того, кто администрирует Booking. В повседневной работе с гостями трогать не нужно.</p>
+        <p>Авто-сообщения настраиваются в экстранете Booking: <em>Posteingang → Buchungsnachrichten → Vorlagen</em>. Шаблоны привязаны <strong>к каждому объекту</strong>; чтобы задать сразу на все — <em>Massenbearbeitung → Nachrichtenvorlagen</em> (создать) и <em>Vorlagenplaner</em> (расписание).</p>
+        <p>Сейчас живут три шаблона (6 языков, на всех 21 объекте):</p>
+        <ul>
+          <li><strong>AFTER BOOKING ALL</strong> — приветствие, триггер «когда гость бронирует». Ведёт гостя в WhatsApp.</li>
+          <li><strong>RATING ALL</strong> — просьба об отзыве, триггер «за 1 день до выезда».</li>
+          <li><strong>HOUSE RULES</strong> — правила дома (тихий дом), опционально для жилых объектов, ~за день до заезда.</li>
+        </ul>
+        <h3>Чистка дублей</h3>
+        <p>Массовый мастер <strong>создаёт и планирует</strong> новые шаблоны, но <strong>не удаляет старые</strong> по-объектные — они продолжают слаться сами и дают дубли. Чтобы убрать: заходите в объект и удаляйте лишний шаблон вручную (<em>Vorlage entfernen</em>).</p>
+        <ul>
+          <li>Оставляем полезное: тихие соседи, парковка.</li>
+          <li>Удаляем мусор: старые «оставьте свой номер / +372 5559 8010».</li>
+        </ul>
+        <p>Плейсхолдеры вставляются кнопками редактора: <code>[FULL_NAME]</code> = имя гостя, <code>[FIRST_NAME]</code> = имя, <code>[PROPERTY_NAME]</code> = название объекта.</p>
+      </section>
+
+      <!-- 8 -->
+      <section id="cheat">
+        <h2><span class="num">08</span> Шпаргалка</h2>
+        <table>
+          <tr><th>Что</th><th>Как / где</th></tr>
+          <tr><td>Ответить гостю</td><td>Свайп-reply в Telegram → пишете по-русски → бот переведёт</td></tr>
+          <tr><td>Вернуть бота на гостя</td><td>Кнопка <span class="kbd">▶️ Вернуть бота</span> под карточкой (или авто через 24ч)</td></tr>
+          <tr><td>Сказать боту про отклонение</td><td>Свайп-reply на карточку → <code>/note текст</code></td></tr>
+          <tr><td>Найти бронь в Booking</td><td>По <strong>номеру брони</strong> или имени — не по номеру WhatsApp</td></tr>
+        </table>
+
+        <div class="box key">
+          <span class="label">Контакты и номера</span>
+          <p><strong>WhatsApp бота (гостевой):</strong> +372 5783 3881 · <code>wa.me/37257833881</code></p>
+          <p><strong>Группа менеджеров:</strong> «Roland — Central Apartments» (Telegram)</p>
+          <p><strong>Уведомления менеджеру (звонок в дверь):</strong> +372 5559 8010</p>
+          <p><strong>Имена:</strong> гость видит «Central Apartments», ассистента зовут «Roland».</p>
+        </div>
+
+        <p style="color:var(--ink-soft); font-size:15px; margin-top:26px">Вопросы по системе или что-то работает не так — пишите Деннису (агентство). Эта страница обновляется по мере развития бота.</p>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><b>Central Apartments</b> — внутренний гайд команды</span>
+    <span>Только для сотрудников · не для публикации</span>
+  </div>
+</footer>
+
+<script>
+  // Active TOC highlight
+  const links = [...document.querySelectorAll('nav.toc a')];
+  const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = map.get(e.target.id);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  document.querySelectorAll('.content section').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

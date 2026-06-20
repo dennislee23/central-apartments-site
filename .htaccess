@@ -1,16 +1,33 @@
-# Block the secret env file
-<FilesMatch "^\.env">
+# Block secret files from the web (env + password file + any dotfile starting .ht)
+<FilesMatch "^\.(env|ht)">
     Require all denied
 </FilesMatch>
-# Hide operator page from search engines
+
+# Hide operator-only pages from search engines
 <Files "update.html">
     Header always set X-Robots-Tag "noindex, nofollow"
 </Files>
+<Files "team.html">
+    Header always set X-Robots-Tag "noindex, nofollow"
+</Files>
+
+# Password-protect the team guide (Basic Auth).
+# AuthUserFile must be an ABSOLUTE filesystem path, which differs per server.
+# deploy.php fills it in automatically on each deploy by replacing the
+# placeholder token on the AuthUserFile line below with the real absolute path.
+<Files "team.html">
+    AuthType Basic
+    AuthName "Central Apartments - team only"
+    AuthUserFile "__HTPASSWD_PATH__"
+    Require valid-user
+</Files>
+
 # Short cache for HTML so updates appear fast; long cache for hashed assets
 <IfModule mod_headers.c>
   <FilesMatch "\.html$">
     Header set Cache-Control "max-age=300, must-revalidate"
   </FilesMatch>
 </IfModule>
+
 # Block the .git directory from the web
 RedirectMatch 404 /\.git

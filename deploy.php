@@ -28,6 +28,19 @@ if ($mode !== 'status') {
   echo "\n--- Post-deploy ---\n";
   foreach (['index.html'] as $f)
     echo file_exists("$dir/$f") ? "$f: OK\n" : "$f: MISSING\n";
+  // Fill the absolute .htpasswd path into .htaccess (Apache needs an absolute
+  // path for AuthUserFile, which only the server knows). The repo ships the
+  // __HTPASSWD_PATH__ token; we substitute it here every deploy (idempotent —
+  // git reset restores the token, this rewrites it to the real path).
+  $hta = "$dir/.htaccess";
+  if (file_exists($hta) && file_exists("$dir/.htpasswd")) {
+    $c = file_get_contents($hta);
+    $c2 = str_replace('__HTPASSWD_PATH__', "$dir/.htpasswd", $c);
+    if ($c2 !== $c) { file_put_contents($hta, $c2); echo ".htaccess: AuthUserFile path set\n"; }
+    else echo ".htaccess: token already resolved\n";
+  } elseif (!file_exists("$dir/.htpasswd")) {
+    echo ".htpasswd: MISSING (team page auth will fail until it exists)\n";
+  }
   $payload = [
     'commit'=>trim((string)shell_exec('git rev-parse HEAD 2>/dev/null')),
     'short' =>trim((string)shell_exec('git rev-parse --short HEAD 2>/dev/null')),
