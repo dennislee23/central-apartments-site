@@ -4,6 +4,8 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Central Apartments — Stay in the heart of Tallinn</title>
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
 <meta name="description" content="Hand-picked serviced apartments across central Tallinn. Free parking, self check-in, and a real concierge on WhatsApp. Book direct on Booking.com." />
 <meta property="og:title" content="Central Apartments — Stay in the heart of Tallinn" />
 <meta property="og:description" content="Hand-picked serviced apartments across central Tallinn. Free parking, self check-in, WhatsApp concierge." />
@@ -41,6 +43,7 @@
   .nav{display:flex; align-items:center; justify-content:space-between; height:72px}
   .brand{font-family:"Fraunces",serif; font-size:21px; font-weight:600; letter-spacing:-.02em; display:flex; align-items:center; gap:10px}
   .brand .dot{width:9px; height:9px; border-radius:50%; background:var(--amber); display:inline-block}
+  .brand .logo{width:30px; height:30px; border-radius:7px; display:inline-block; object-fit:cover}
   .nav-links{display:flex; gap:30px; align-items:center; font-size:15px}
   .nav-links a{color:var(--ink-soft); transition:color .2s}
   .nav-links a:hover{color:var(--ink)}
@@ -147,7 +150,7 @@
 
 <header id="hdr">
   <div class="wrap nav">
-    <a class="brand" href="#top"><span class="dot"></span>Central Apartments</a>
+    <a class="brand" href="#top"><img class="logo" src="img/logo.png" alt="Central Apartments" />Central Apartments</a>
     <nav class="nav-links">
       <a href="#stays">Stays</a>
       <a href="#difference">Why us</a>
