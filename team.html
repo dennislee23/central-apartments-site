@@ -199,10 +199,18 @@
       <!-- 3 -->
       <section id="telegram">
         <h2><span class="num">03</span> Петля менеджера в Telegram</h2>
-        <p class="lead">Вся переписка с гостями зеркалится в группу <strong>«Roland — Central Apartments»</strong> в Telegram. Это ваш рабочий экран.</p>
-        <p>Когда вопрос выходит за рамки бота, приходит жалоба или присылают не-текст — бот <strong>эскалирует</strong>: ставит себя на паузу по этому гостю и публикует <strong>🚨 карточку</strong>. В карточке всё, что нужно, чтобы понять, кто это:</p>
+        <p class="lead">Вся переписка с гостями зеркалится в группу <strong>«Roland — Central Apartments»</strong> в Telegram. Это ваш рабочий экран — видно и что пишет гость, и что отвечает бот.</p>
+        <h3>Как читать карточки</h3>
+        <ul>
+          <li><strong>💬 Имя · WhatsApp</strong> (или <strong>· Booking.com</strong>) — <strong>гость написал</strong>. Под текстом — 🇷🇺 перевод на русский.</li>
+          <li><strong>🤖 Roland → Имя</strong> — <strong>бот ответил</strong> гостю (там же отмечено, если отправил фото).</li>
+          <li><strong>✅ Имя — опознан по номеру брони</strong> — гость написал с незнакомого номера, но прислал номер брони, и бот сам его узнал.</li>
+          <li><strong>🚨 Нужен человек</strong> — бот не справился и <strong>передаёт гостя вам</strong> (см. ниже).</li>
+        </ul>
+        <p>Если карточка помечена <strong>· Booking.com</strong> — гость пишет в чат Booking, а не в WhatsApp. Такому <strong>отвечайте в экстранете Booking</strong> (в Booking-чате бот пока сам не отвечает).</p>
+        <p>Когда вопрос выходит за рамки бота, приходит жалоба или присылают не-текст — бот <strong>передаёт вам</strong>: ставит себя на паузу по этому гостю и публикует карточку <strong>🚨 «Нужен человек»</strong>. В ней всё, что нужно, чтобы понять, кто это:</p>
         <div class="card-mock">
-          <div class="ttl">🚨 Эскалация · приоритет высокий</div>
+          <div class="ttl">🚨 Нужен человек · важность: высокая</div>
           <div class="fld"><span>Гость:</span><span>Enrique (Перу)</span></div>
           <div class="fld"><span>WhatsApp гостя:</span><span>+51 …</span></div>
           <div class="fld"><span>Бронь Booking.com:</span><span>6538679883</span></div>
