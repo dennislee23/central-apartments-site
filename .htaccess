@@ -25,6 +25,9 @@
 <Files "waiting.php">
     Header always set X-Robots-Tag "noindex, nofollow"
 </Files>
+<Files "arrivals.php">
+    Header always set X-Robots-Tag "noindex, nofollow"
+</Files>
 
 # Pretty URLs (admin hub + team guide static; inbox/learn/waiting proxy the worker)
 <IfModule mod_rewrite.c>
@@ -34,6 +37,7 @@
   RewriteRule ^inbox/tr/?$ inbox.php?tr=1 [L,QSA]
   RewriteRule ^inbox/?$ inbox.php [L]
   RewriteRule ^waiting/?$ waiting.php [L]
+  RewriteRule ^arrivals/?$ arrivals.php [L]
   RewriteRule ^learn/act/?$ learn.php [L,QSA]
   RewriteRule ^learn/?$ learn.php [L,QSA]
 </IfModule>
@@ -78,6 +82,12 @@
     Require valid-user
 </Files>
 <Files "waiting.php">
+    AuthType Basic
+    AuthName "Central Apartments - team only"
+    AuthUserFile "__HTPASSWD_PATH__"
+    Require valid-user
+</Files>
+<Files "arrivals.php">
     AuthType Basic
     AuthName "Central Apartments - team only"
     AuthUserFile "__HTPASSWD_PATH__"
