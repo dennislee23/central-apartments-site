@@ -13,11 +13,16 @@
 <Files "inbox.php">
     Header always set X-Robots-Tag "noindex, nofollow"
 </Files>
+<Files "learn.php">
+    Header always set X-Robots-Tag "noindex, nofollow"
+</Files>
 
-# Pretty URL: /inbox -> inbox.php (proxies the worker-rendered conversations page)
+# Pretty URLs -> PHP proxies (worker-rendered pages: conversations + bot learning)
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteRule ^inbox/?$ inbox.php [L]
+  RewriteRule ^learn/act/?$ learn.php [L,QSA]
+  RewriteRule ^learn/?$ learn.php [L,QSA]
 </IfModule>
 
 # Make the Authorization header visible to PHP (PHP-FPM/CGI doesn't expose it by default)
@@ -36,6 +41,12 @@
     Require valid-user
 </Files>
 <Files "inbox.php">
+    AuthType Basic
+    AuthName "Central Apartments - team only"
+    AuthUserFile "__HTPASSWD_PATH__"
+    Require valid-user
+</Files>
+<Files "learn.php">
     AuthType Basic
     AuthName "Central Apartments - team only"
     AuthUserFile "__HTPASSWD_PATH__"
