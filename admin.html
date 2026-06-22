@@ -34,6 +34,14 @@
   a.card p{color:var(--soft);font-size:14.5px;line-height:1.5;margin:0 0 16px;flex:1}
   .go{font-weight:600;color:var(--teal);font-size:14.5px}
   a.card:hover .go{color:var(--tealdeep)}
+  .mh{font-family:"Fraunces",serif;font-weight:500;font-size:24px;margin:40px 0 14px}
+  .status{display:flex;flex-wrap:wrap;gap:10px 22px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;font-size:14.5px;color:var(--soft);box-shadow:var(--shadow)}
+  .status b{font-family:"Fraunces",serif;color:var(--ink);font-weight:600}
+  .status .on{color:#1c7a40;font-weight:700}.status .off{color:var(--amber);font-weight:700}
+  .acts{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+  .acts button{font:inherit;font-weight:600;font-size:14px;padding:10px 16px;border-radius:100px;border:1px solid var(--line);background:var(--card);cursor:pointer;transition:background .2s}
+  .acts button:hover{background:var(--bone2)}.acts button:disabled{opacity:.5;cursor:default}
+  .out{white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;background:var(--bone2);border:1px solid var(--line);border-radius:10px;padding:12px;max-height:220px;overflow:auto;margin:0 0 10px}
   footer{margin-top:auto;border-top:1px solid var(--line);background:var(--bone2)}
   footer .wrap{padding:18px 24px;color:var(--soft);font-size:13px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   footer a{color:var(--teal);text-decoration:none}
@@ -64,7 +72,41 @@
         <span class="go">Открыть →</span>
       </a>
     </div>
+    <h2 class="mh">Управление</h2>
+    <div id="status" class="status">загрузка статуса…</div>
+    <div class="acts">
+      <button data-do="sync">🔄 Синхронизировать брони</button>
+      <button data-do="booking-poll">📨 Опросить Booking</button>
+      <button data-do="learn-run">🧠 Прогнать обучение</button>
+      <button data-do="stats">↻ Обновить статус</button>
+    </div>
+    <pre id="out" class="out" hidden></pre>
   </div>
   <footer><div class="wrap"><span>Central Apartments — внутренняя панель</span><a href="/">← на сайт</a></div></footer>
+<script>
+const $=s=>document.querySelector(s);
+function renderStatus(d){
+  if(!d||d.error){$("#status").textContent='статус недоступен';return;}
+  const yn=v=>v?'<span class="on">вкл</span>':'<span class="off">выкл</span>';
+  $("#status").innerHTML=[
+    `Брони: <b>${d.bookings}</b>`,
+    `Сообщений WA: <b>${d.messages}</b>`,
+    `Booking-сообщений: <b>${d.booking_messages??'—'}</b>`,
+    `Приветствий: <b>${d.welcomed}</b>`,
+    `Знания: <b>${d.knowledge_approved??0}</b> ✓ / <b>${d.knowledge_pending??0}</b> на проверке`,
+    `Welcome: ${yn(d.welcome_enabled)}`,
+    `Авто-ответ в Booking: ${yn(d.booking_autoreply)}`,
+  ].map(x=>`<span>${x}</span>`).join('');
+}
+async function loadStatus(){try{const r=await fetch('act.php?do=stats',{credentials:'same-origin'});renderStatus(await r.json());}catch(e){$("#status").textContent='статус недоступен';}}
+document.querySelectorAll('.acts button').forEach(b=>b.onclick=async()=>{
+  const all=[...document.querySelectorAll('.acts button')];all.forEach(x=>x.disabled=true);
+  const out=$("#out");out.hidden=false;out.textContent='Выполняю «'+b.textContent.trim()+'»…';
+  try{const r=await fetch('act.php?do='+b.dataset.do,{credentials:'same-origin'});const t=await r.text();out.textContent=t;}
+  catch(e){out.textContent='Ошибка: '+e.message;}
+  all.forEach(x=>x.disabled=false);loadStatus();
+});
+loadStatus();
+</script>
 </body>
 </html>
