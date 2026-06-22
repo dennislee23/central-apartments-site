@@ -24,8 +24,10 @@
     border:1px solid var(--line);border-radius:100px;padding:4px 10px;background:var(--card)}
   h1{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(30px,5vw,46px);line-height:1.08;margin:0 0 10px}
   .lead{color:var(--soft);font-size:18px;max-width:42em;margin:0 0 38px}
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px}
   @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .badge{font-family:"Hanken Grotesk";font-size:13px;font-weight:700;padding:2px 9px;border-radius:100px;background:var(--bone2);color:var(--soft);vertical-align:middle}
+  .badge.hot{background:var(--amber);color:#fff}
   a.card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 24px 24px;
     text-decoration:none;color:inherit;box-shadow:var(--shadow);transition:transform .25s ease,box-shadow .25s}
   a.card:hover{transform:translateY(-5px);box-shadow:0 24px 50px -22px rgba(20,62,58,.32)}
@@ -71,6 +73,12 @@
         <p>Как устроена система: воронка, эскалации, ответы гостю, заметки боту, когда нужен человек.</p>
         <span class="go">Открыть →</span>
       </a>
+      <a class="card" href="/waiting">
+        <div class="ic">⏳</div>
+        <h2>Ждут ответа <span id="wbadge" class="badge"></span></h2>
+        <p>Гости, у кого последнее сообщение — их. По обоим каналам, в одном списке.</p>
+        <span class="go">Открыть →</span>
+      </a>
     </div>
     <h2 class="mh">Управление</h2>
     <div id="status" class="status">загрузка статуса…</div>
@@ -88,7 +96,9 @@ const $=s=>document.querySelector(s);
 function renderStatus(d){
   if(!d||d.error){$("#status").textContent='статус недоступен';return;}
   const yn=v=>v?'<span class="on">вкл</span>':'<span class="off">выкл</span>';
+  const w=d.waiting??0, badge=$("#wbadge"); if(badge){badge.textContent=w; badge.className='badge'+(w>0?' hot':'');}
   $("#status").innerHTML=[
+    `Ждут ответа: <b>${w}</b>`,
     `Брони: <b>${d.bookings}</b>`,
     `Сообщений WA: <b>${d.messages}</b>`,
     `Booking-сообщений: <b>${d.booking_messages??'—'}</b>`,
