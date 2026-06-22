@@ -16,10 +16,15 @@
 <Files "learn.php">
     Header always set X-Robots-Tag "noindex, nofollow"
 </Files>
+<Files "admin.html">
+    Header always set X-Robots-Tag "noindex, nofollow"
+</Files>
 
-# Pretty URLs -> PHP proxies (worker-rendered pages: conversations + bot learning)
+# Pretty URLs (admin hub + team guide static; inbox/learn proxy the worker)
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  RewriteRule ^admin/?$ admin.html [L]
+  RewriteRule ^team/?$ team.html [L]
   RewriteRule ^inbox/?$ inbox.php [L]
   RewriteRule ^learn/act/?$ learn.php [L,QSA]
   RewriteRule ^learn/?$ learn.php [L,QSA]
@@ -47,6 +52,12 @@
     Require valid-user
 </Files>
 <Files "learn.php">
+    AuthType Basic
+    AuthName "Central Apartments - team only"
+    AuthUserFile "__HTPASSWD_PATH__"
+    Require valid-user
+</Files>
+<Files "admin.html">
     AuthType Basic
     AuthName "Central Apartments - team only"
     AuthUserFile "__HTPASSWD_PATH__"

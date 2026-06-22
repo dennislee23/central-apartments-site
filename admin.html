@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Central Apartments — панель</title>
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--bone:#F4EFE6;--bone2:#EBE4D6;--ink:#1B1A17;--soft:#46433C;--teal:#1E5B55;--tealdeep:#143E3A;--amber:#C8743A;--line:#D8CFBE;--card:#FBF8F2;
+    --shadow:0 1px 2px rgba(27,26,23,.04), 0 12px 40px -16px rgba(20,62,58,.18)}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;background:var(--bone);color:var(--ink);font-family:"Hanken Grotesk",system-ui,sans-serif;font-size:16px;
+    display:flex;flex-direction:column}
+  .wrap{max-width:980px;margin:0 auto;padding:46px 24px 60px;width:100%}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:30px}
+  .brand img{width:34px;height:34px;border-radius:8px}
+  .brand span{font-family:"Fraunces",serif;font-weight:600;font-size:21px}
+  .brand small{font-family:"Hanken Grotesk";font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);
+    border:1px solid var(--line);border-radius:100px;padding:4px 10px;background:var(--card)}
+  h1{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(30px,5vw,46px);line-height:1.08;margin:0 0 10px}
+  .lead{color:var(--soft);font-size:18px;max-width:42em;margin:0 0 38px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  a.card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 24px 24px;
+    text-decoration:none;color:inherit;box-shadow:var(--shadow);transition:transform .25s ease,box-shadow .25s}
+  a.card:hover{transform:translateY(-5px);box-shadow:0 24px 50px -22px rgba(20,62,58,.32)}
+  .ic{width:52px;height:52px;border-radius:13px;display:grid;place-items:center;font-size:26px;background:var(--bone2);margin-bottom:16px}
+  a.card h2{font-family:"Fraunces",serif;font-weight:600;font-size:23px;margin:0 0 7px}
+  a.card p{color:var(--soft);font-size:14.5px;line-height:1.5;margin:0 0 16px;flex:1}
+  .go{font-weight:600;color:var(--teal);font-size:14.5px}
+  a.card:hover .go{color:var(--tealdeep)}
+  footer{margin-top:auto;border-top:1px solid var(--line);background:var(--bone2)}
+  footer .wrap{padding:18px 24px;color:var(--soft);font-size:13px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  footer a{color:var(--teal);text-decoration:none}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand"><img src="img/logo.png" alt="" /><span>Central Apartments</span> <small>Панель команды</small></div>
+    <h1>Панель</h1>
+    <p class="lead">Всё для работы с гостями в одном месте. Открывайте нужный раздел — повторно вводить пароль не нужно.</p>
+    <div class="grid">
+      <a class="card" href="/inbox">
+        <div class="ic">💬</div>
+        <h2>Диалоги</h2>
+        <p>Вся переписка с гостями — WhatsApp и Booking в одной ленте. Видно, кто ответил: бот или человек.</p>
+        <span class="go">Открыть →</span>
+      </a>
+      <a class="card" href="/learn">
+        <div class="ic">🧠</div>
+        <h2>Обучение бота</h2>
+        <p>Факты, извлечённые из ответов команды. Одобрите — и бот начнёт отвечать на это сам.</p>
+        <span class="go">Открыть →</span>
+      </a>
+      <a class="card" href="/team">
+        <div class="ic">📘</div>
+        <h2>Гайд команды</h2>
+        <p>Как устроена система: воронка, эскалации, ответы гостю, заметки боту, когда нужен человек.</p>
+        <span class="go">Открыть →</span>
+      </a>
+    </div>
+  </div>
+  <footer><div class="wrap"><span>Central Apartments — внутренняя панель</span><a href="/">← на сайт</a></div></footer>
+</body>
+</html>
