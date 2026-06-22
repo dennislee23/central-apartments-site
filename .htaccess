@@ -10,12 +10,32 @@
 <Files "team.html">
     Header always set X-Robots-Tag "noindex, nofollow"
 </Files>
+<Files "inbox.php">
+    Header always set X-Robots-Tag "noindex, nofollow"
+</Files>
 
-# Password-protect the team guide (Basic Auth).
+# Pretty URL: /inbox -> inbox.php (proxies the worker-rendered conversations page)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^inbox/?$ inbox.php [L]
+</IfModule>
+
+# Make the Authorization header visible to PHP (PHP-FPM/CGI doesn't expose it by default)
+<IfModule mod_setenvif.c>
+  SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+</IfModule>
+
+# Password-protect the team-only pages (Basic Auth).
 # AuthUserFile must be an ABSOLUTE filesystem path, which differs per server.
 # deploy.php fills it in automatically on each deploy by replacing the
 # placeholder token on the AuthUserFile line below with the real absolute path.
 <Files "team.html">
+    AuthType Basic
+    AuthName "Central Apartments - team only"
+    AuthUserFile "__HTPASSWD_PATH__"
+    Require valid-user
+</Files>
+<Files "inbox.php">
     AuthType Basic
     AuthName "Central Apartments - team only"
     AuthUserFile "__HTPASSWD_PATH__"
