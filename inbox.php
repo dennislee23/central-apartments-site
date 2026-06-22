@@ -14,7 +14,9 @@ if ($user === '') {
     if ($dec !== false && strpos($dec, ':') !== false) [$user, $pass] = explode(':', $dec, 2);
   }
 }
+// /inbox -> the page; /inbox/tr?key=... -> RU translations for one conversation.
 $WORKER = 'https://roland-bot.hello-071.workers.dev/inbox';
+if (isset($_GET['tr'])) $WORKER .= '/tr?key=' . urlencode($_GET['key'] ?? '');
 
 $body = false; $code = 0;
 if (function_exists('curl_init')) {
