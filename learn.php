@@ -12,19 +12,26 @@ if ($user === '') {
   }
 }
 
-// /learn/act carries a 'do' param; everything else is the page.
+// POST = the "add info" form (-> /learn/add); /learn/act carries a 'do' param;
+// everything else is the page.
 $base = 'https://roland-bot.hello-071.workers.dev/learn';
-$target = isset($_GET['do']) ? $base . '/act' : $base;
+$isPost = ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST';
+$target = $isPost ? $base . '/add' : (isset($_GET['do']) ? $base . '/act' : $base);
 $qs = $_SERVER['QUERY_STRING'] ?? '';
-if ($qs !== '') $target .= '?' . $qs;
+if (!$isPost && $qs !== '') $target .= '?' . $qs;
+$postBody = $isPost ? file_get_contents('php://input') : '';
 
 $body = false; $code = 0; $ctype = 'text/html; charset=utf-8';
 if (function_exists('curl_init')) {
   $ch = curl_init($target);
+  $hdrs = ['Authorization: Basic ' . base64_encode("$user:$pass")];
+  if ($isPost) $hdrs[] = 'Content-Type: application/json';
   curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_HTTPHEADER => ['Authorization: Basic ' . base64_encode("$user:$pass")],
+    CURLOPT_HTTPHEADER => $hdrs,
     CURLOPT_TIMEOUT => 30,
+    CURLOPT_POST => $isPost,
+    CURLOPT_POSTFIELDS => $isPost ? $postBody : null,
   ]);
   $body = curl_exec($ch);
   $code = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -33,7 +40,9 @@ if (function_exists('curl_init')) {
   curl_close($ch);
 } else {
   $ctx = stream_context_create(['http' => [
-    'header' => 'Authorization: Basic ' . base64_encode("$user:$pass") . "\r\n",
+    'header' => 'Authorization: Basic ' . base64_encode("$user:$pass") . "\r\n" . ($isPost ? "Content-Type: application/json\r\n" : ''),
+    'method' => $isPost ? 'POST' : 'GET',
+    'content' => $isPost ? $postBody : '',
     'timeout' => 30, 'ignore_errors' => true,
   ]]);
   $body = @file_get_contents($target, false, $ctx);
