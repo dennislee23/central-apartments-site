@@ -12,7 +12,10 @@ if ($user === '') {
 }
 $base = 'https://roland-bot.hello-071.workers.dev';
 $isPost = ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST';
-$target = $isPost ? $base . '/apartments/photo' : $base . '/apartments';
+$op = $_GET['op'] ?? '';
+$target = $isPost
+  ? $base . ($op === 'remove' ? '/apartments/photo-remove' : '/apartments/photo')
+  : $base . '/apartments';
 $postBody = $isPost ? file_get_contents('php://input') : '';
 
 $body = false; $code = 0; $ctype = $isPost ? 'application/json' : 'text/html; charset=utf-8';
