@@ -26,13 +26,13 @@ if (function_exists('curl_init')) {
   $ch = curl_init($target);
   $hdrs = ['Authorization: Basic ' . base64_encode("$user:$pass")];
   if ($isPost) $hdrs[] = 'Content-Type: application/json';
-  curl_setopt_array($ch, [
+  $opts = [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_HTTPHEADER => $hdrs,
     CURLOPT_TIMEOUT => 30,
-    CURLOPT_POST => $isPost,
-    CURLOPT_POSTFIELDS => $isPost ? $postBody : null,
-  ]);
+  ];
+  if ($isPost) { $opts[CURLOPT_POST] = true; $opts[CURLOPT_POSTFIELDS] = $postBody; }
+  curl_setopt_array($ch, $opts);
   $body = curl_exec($ch);
   $code = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
   $ct = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
