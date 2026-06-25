@@ -20,6 +20,8 @@ $target = $isPost ? ($_GET['run'] ?? '') === '1' ? $base . '/run' : $base . '/ad
 $qs = $_SERVER['QUERY_STRING'] ?? '';
 if (!$isPost && $qs !== '') $target .= '?' . $qs;
 $postBody = $isPost ? file_get_contents('php://input') : '';
+// Distillation (run) calls Claude per message-pair and can take ~40s — give it room.
+$timeout = (($_GET['run'] ?? '') === '1') ? 120 : 30;
 
 $body = false; $code = 0; $ctype = 'text/html; charset=utf-8';
 if (function_exists('curl_init')) {
@@ -29,7 +31,7 @@ if (function_exists('curl_init')) {
   $opts = [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_HTTPHEADER => $hdrs,
-    CURLOPT_TIMEOUT => 30,
+    CURLOPT_TIMEOUT => $timeout,
   ];
   if ($isPost) { $opts[CURLOPT_POST] = true; $opts[CURLOPT_POSTFIELDS] = $postBody; }
   curl_setopt_array($ch, $opts);
@@ -43,7 +45,7 @@ if (function_exists('curl_init')) {
     'header' => 'Authorization: Basic ' . base64_encode("$user:$pass") . "\r\n" . ($isPost ? "Content-Type: application/json\r\n" : ''),
     'method' => $isPost ? 'POST' : 'GET',
     'content' => $isPost ? $postBody : '',
-    'timeout' => 30, 'ignore_errors' => true,
+    'timeout' => $timeout, 'ignore_errors' => true,
   ]]);
   $body = @file_get_contents($target, false, $ctx);
   if (isset($http_response_header)) {
