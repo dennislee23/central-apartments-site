@@ -15,7 +15,8 @@ $isPost = ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST';
 $op = $_GET['op'] ?? '';
 $postPath = $op === 'remove' ? '/apartments/photo-remove'
   : ($op === 'wifi' ? '/apartments/wifi'
-  : ($op === 'photos' ? '/apartments/photos' : '/apartments/photo'));
+  : ($op === 'templates' ? '/apartments/templates'
+  : ($op === 'photos' ? '/apartments/photos' : '/apartments/photo')));
 $target = $isPost ? $base . $postPath : $base . '/apartments';
 $timeout = $op === 'photos' ? 120 : 30; // batch upload can be large
 $postBody = $isPost ? file_get_contents('php://input') : '';
