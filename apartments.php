@@ -13,8 +13,11 @@ if ($user === '') {
 $base = 'https://roland-bot.hello-071.workers.dev';
 $isPost = ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST';
 $op = $_GET['op'] ?? '';
-$postPath = $op === 'remove' ? '/apartments/photo-remove' : ($op === 'wifi' ? '/apartments/wifi' : '/apartments/photo');
+$postPath = $op === 'remove' ? '/apartments/photo-remove'
+  : ($op === 'wifi' ? '/apartments/wifi'
+  : ($op === 'photos' ? '/apartments/photos' : '/apartments/photo'));
 $target = $isPost ? $base . $postPath : $base . '/apartments';
+$timeout = $op === 'photos' ? 120 : 30; // batch upload can be large
 $postBody = $isPost ? file_get_contents('php://input') : '';
 
 $body = false; $code = 0; $ctype = $isPost ? 'application/json' : 'text/html; charset=utf-8';
@@ -22,7 +25,7 @@ if (function_exists('curl_init')) {
   $ch = curl_init($target);
   $hdrs = ['Authorization: Basic ' . base64_encode("$user:$pass")];
   if ($isPost) $hdrs[] = 'Content-Type: application/json';
-  $opts = [CURLOPT_RETURNTRANSFER => true, CURLOPT_HTTPHEADER => $hdrs, CURLOPT_TIMEOUT => 60];
+  $opts = [CURLOPT_RETURNTRANSFER => true, CURLOPT_HTTPHEADER => $hdrs, CURLOPT_TIMEOUT => $timeout];
   if ($isPost) { $opts[CURLOPT_POST] = true; $opts[CURLOPT_POSTFIELDS] = $postBody; }
   curl_setopt_array($ch, $opts);
   $body = curl_exec($ch);
@@ -35,7 +38,7 @@ if (function_exists('curl_init')) {
     'header' => 'Authorization: Basic ' . base64_encode("$user:$pass") . "\r\n" . ($isPost ? "Content-Type: application/json\r\n" : ''),
     'method' => $isPost ? 'POST' : 'GET',
     'content' => $isPost ? $postBody : '',
-    'timeout' => 60, 'ignore_errors' => true,
+    'timeout' => $timeout, 'ignore_errors' => true,
   ]]);
   $body = @file_get_contents($target, false, $ctx);
   if (isset($http_response_header)) {
