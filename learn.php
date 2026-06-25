@@ -16,7 +16,7 @@ if ($user === '') {
 // everything else is the page.
 $base = 'https://roland-bot.hello-071.workers.dev/learn';
 $isPost = ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST';
-$target = $isPost ? $base . '/add' : (isset($_GET['do']) ? $base . '/act' : $base);
+$target = $isPost ? ($_GET['run'] ?? '') === '1' ? $base . '/run' : $base . '/add' : (isset($_GET['do']) ? $base . '/act' : $base);
 $qs = $_SERVER['QUERY_STRING'] ?? '';
 if (!$isPost && $qs !== '') $target .= '?' . $qs;
 $postBody = $isPost ? file_get_contents('php://input') : '';
