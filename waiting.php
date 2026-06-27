@@ -1,15 +1,7 @@
 <?php
 // Reverse proxy for the "Waiting for reply" page (rendered by the worker from D1),
 // served under centralapartments.ee behind the site's Basic Auth.
-$user = $_SERVER['PHP_AUTH_USER'] ?? '';
-$pass = $_SERVER['PHP_AUTH_PW'] ?? '';
-if ($user === '') {
-  $hdr = $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '';
-  if (stripos($hdr, 'Basic ') === 0) {
-    $dec = base64_decode(substr($hdr, 6));
-    if ($dec !== false && strpos($dec, ':') !== false) [$user, $pass] = explode(':', $dec, 2);
-  }
-}
+require __DIR__ . '/auth.php';  // cookie-session auth (sets $user/$pass for the Worker call)
 $WORKER = 'https://roland-bot.hello-071.workers.dev/waiting';
 $body = false; $code = 0;
 if (function_exists('curl_init')) {

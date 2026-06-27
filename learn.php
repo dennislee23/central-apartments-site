@@ -2,15 +2,7 @@
 // Reverse proxy for the bot-learning review page (rendered by the Worker from
 // D1). Serves both /learn (the page) and /learn/act (approve/reject), under the
 // site's Basic Auth. We forward the team's credentials to the Worker.
-$user = $_SERVER['PHP_AUTH_USER'] ?? '';
-$pass = $_SERVER['PHP_AUTH_PW'] ?? '';
-if ($user === '') {
-  $hdr = $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '';
-  if (stripos($hdr, 'Basic ') === 0) {
-    $dec = base64_decode(substr($hdr, 6));
-    if ($dec !== false && strpos($dec, ':') !== false) [$user, $pass] = explode(':', $dec, 2);
-  }
-}
+require __DIR__ . '/auth.php';  // cookie-session auth (sets $user/$pass for the Worker call)
 
 // POST = the "add info" form (-> /learn/add); /learn/act carries a 'do' param;
 // everything else is the page.

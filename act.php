@@ -1,7 +1,8 @@
 <?php
-// Admin actions proxy. The team is authenticated here via Basic Auth (.htaccess);
-// we call the worker's token-gated /admin/* endpoints on their behalf, with the
-// token kept server-side (ADMIN_TOKEN in .env) so it's never exposed to the browser.
+// Admin actions proxy. The team is authenticated here via the shared cookie-session
+// (auth.php; deny-by-default); we call the worker's token-gated /admin/* endpoints on
+// their behalf, with the token kept server-side (ADMIN_TOKEN in .env).
+require __DIR__ . '/auth.php';
 $tok = getenv('ADMIN_TOKEN');
 if (!$tok && file_exists(__DIR__ . '/.env')) {
   foreach (file(__DIR__ . '/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $l) {

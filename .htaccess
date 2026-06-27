@@ -51,53 +51,17 @@
   SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
 </IfModule>
 
-# Password-protect the team-only pages (Basic Auth).
-# AuthUserFile must be an ABSOLUTE filesystem path, which differs per server.
-# deploy.php fills it in automatically on each deploy by replacing the
-# placeholder token on the AuthUserFile line below with the real absolute path.
+# Password-protect the STATIC operator pages with Basic Auth. The PHP team pages
+# (inbox/learn/waiting/arrivals/apartments/act) now authenticate via the cookie
+# session in auth.php — log in once, no re-prompt — so they are NOT listed here.
+# AuthUserFile must be an ABSOLUTE filesystem path; deploy.php fills in the token.
 <Files "team.html">
     AuthType Basic
     AuthName "Central Apartments - team only"
     AuthUserFile "__HTPASSWD_PATH__"
     Require valid-user
 </Files>
-<Files "inbox.php">
-    AuthType Basic
-    AuthName "Central Apartments - team only"
-    AuthUserFile "__HTPASSWD_PATH__"
-    Require valid-user
-</Files>
-<Files "learn.php">
-    AuthType Basic
-    AuthName "Central Apartments - team only"
-    AuthUserFile "__HTPASSWD_PATH__"
-    Require valid-user
-</Files>
 <Files "admin.html">
-    AuthType Basic
-    AuthName "Central Apartments - team only"
-    AuthUserFile "__HTPASSWD_PATH__"
-    Require valid-user
-</Files>
-<Files "act.php">
-    AuthType Basic
-    AuthName "Central Apartments - team only"
-    AuthUserFile "__HTPASSWD_PATH__"
-    Require valid-user
-</Files>
-<Files "waiting.php">
-    AuthType Basic
-    AuthName "Central Apartments - team only"
-    AuthUserFile "__HTPASSWD_PATH__"
-    Require valid-user
-</Files>
-<Files "arrivals.php">
-    AuthType Basic
-    AuthName "Central Apartments - team only"
-    AuthUserFile "__HTPASSWD_PATH__"
-    Require valid-user
-</Files>
-<Files "apartments.php">
     AuthType Basic
     AuthName "Central Apartments - team only"
     AuthUserFile "__HTPASSWD_PATH__"

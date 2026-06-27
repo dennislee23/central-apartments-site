@@ -4,16 +4,7 @@
 // centralapartments.ee so the pilot lives on the client's own domain. Apache
 // Basic Auth (see .htaccess) authenticates the team once; we forward the same
 // credentials to the Worker, which also requires them.
-$user = $_SERVER['PHP_AUTH_USER'] ?? '';
-$pass = $_SERVER['PHP_AUTH_PW'] ?? '';
-// Fallback for PHP-FPM/CGI where PHP_AUTH_* isn't populated: parse the raw header.
-if ($user === '') {
-  $hdr = $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '';
-  if (stripos($hdr, 'Basic ') === 0) {
-    $dec = base64_decode(substr($hdr, 6));
-    if ($dec !== false && strpos($dec, ':') !== false) [$user, $pass] = explode(':', $dec, 2);
-  }
-}
+require __DIR__ . '/auth.php';  // cookie-session auth (sets $user/$pass for the Worker call)
 // /inbox -> the page; /inbox/tr?key=... -> RU translations for one conversation.
 $WORKER = 'https://roland-bot.hello-071.workers.dev/inbox';
 if (isset($_GET['tr'])) $WORKER .= '/tr?key=' . urlencode($_GET['key'] ?? '');

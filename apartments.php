@@ -1,15 +1,7 @@
 <?php
 // Reverse proxy for the "Objects" page (rendered by the worker from D1).
 // GET  -> the page (/apartments). POST -> a photo upload (/apartments/photo).
-$user = $_SERVER['PHP_AUTH_USER'] ?? '';
-$pass = $_SERVER['PHP_AUTH_PW'] ?? '';
-if ($user === '') {
-  $hdr = $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '';
-  if (stripos($hdr, 'Basic ') === 0) {
-    $dec = base64_decode(substr($hdr, 6));
-    if ($dec !== false && strpos($dec, ':') !== false) [$user, $pass] = explode(':', $dec, 2);
-  }
-}
+require __DIR__ . '/auth.php';  // cookie-session auth (sets $user/$pass for the Worker call)
 $base = 'https://roland-bot.hello-071.workers.dev';
 $isPost = ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST';
 $op = $_GET['op'] ?? '';
