@@ -14,9 +14,17 @@ $allow = ['sync', 'stats', 'learn-run', 'booking-poll'];   // safe, idempotent a
 if (!in_array($do, $allow, true)) { http_response_code(400); header('Content-Type: application/json'); die('{"error":"bad action"}'); }
 if (!$tok) { http_response_code(500); header('Content-Type: application/json'); die('{"error":"ADMIN_TOKEN not configured"}'); }
 
-$url = 'https://roland-bot.hello-071.workers.dev/admin/' . $do . '?token=' . urlencode($tok);
+// Token goes in a header, not the query string: a URL-borne secret ends up in the
+// worker's request logs, in browser history and in Referer headers. ADMIN_TOKEN is
+// also its own secret now — it used to be the same value the Meta webhook uses,
+// so anyone who could read the app's webhook config held admin rights here.
+$url = 'https://roland-bot.hello-071.workers.dev/admin/' . $do;
 $ch = curl_init($url);
-curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 90]);
+curl_setopt_array($ch, [
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_TIMEOUT => 90,
+  CURLOPT_HTTPHEADER => ['X-Admin-Token: ' . $tok],
+]);
 $body = curl_exec($ch);
 $code = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
