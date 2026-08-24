@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex, nofollow" />
-<title>Central Apartments — панель</title>
+<title>Central Apartments — рабочий стол</title>
 <link rel="icon" type="image/png" href="favicon.png" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -50,9 +50,27 @@
 </style>
 </head>
 <body>
+<style>
+body{padding-left:56px}
+.rsnav{position:fixed;left:0;top:0;bottom:0;width:56px;background:#143E3A;display:flex;flex-direction:column;gap:2px;padding:8px 0;z-index:3000;overflow:hidden;white-space:nowrap;transition:width .16s ease;box-shadow:2px 0 14px rgba(0,0,0,.14);font-family:"Hanken Grotesk",system-ui,sans-serif}
+.rsnav:hover,.rsnav.open{width:212px}
+.rsnav-burger{background:none;border:0;color:#EBE4D6;font-size:20px;line-height:1;padding:10px 16px 12px;cursor:pointer;text-align:left;flex:none}
+.rsnav-i{display:flex;align-items:center;gap:14px;padding:11px 16px;color:#CFE3DE;text-decoration:none;font-size:14.5px;font-weight:600;border-left:3px solid transparent}
+.rsnav-ic{width:24px;text-align:center;font-size:19px;flex:none}
+.rsnav-tx{opacity:0;transition:opacity .12s ease}
+.rsnav:hover .rsnav-tx,.rsnav.open .rsnav-tx{opacity:1}
+.rsnav-i:hover{background:rgba(255,255,255,.09);color:#fff}
+.rsnav-i.on{background:#1E5B55;color:#fff;border-left-color:#C8743A}
+@media (max-width:640px){.rsnav:hover{width:56px}.rsnav.open{width:212px}}
+</style>
+<nav class="rsnav" id="rsnav"><button class="rsnav-burger" onclick="rsNavToggle()" aria-label="Меню">☰</button><a class="rsnav-i on" href="/admin"><span class="rsnav-ic">🏠</span><span class="rsnav-tx">Рабочий стол</span></a><a class="rsnav-i" href="/inbox"><span class="rsnav-ic">💬</span><span class="rsnav-tx">Диалоги</span></a><a class="rsnav-i" href="/waiting"><span class="rsnav-ic">⏳</span><span class="rsnav-tx">Ждут ответа</span></a><a class="rsnav-i" href="/arrivals"><span class="rsnav-ic">📅</span><span class="rsnav-tx">Заезды</span></a><a class="rsnav-i" href="/apartments"><span class="rsnav-ic">🏢</span><span class="rsnav-tx">Объекты</span></a><a class="rsnav-i" href="/learn"><span class="rsnav-ic">🎓</span><span class="rsnav-tx">Обучение</span></a><a class="rsnav-i" href="/ask"><span class="rsnav-ic">🤖</span><span class="rsnav-tx">Спросить бота</span></a></nav>
+<script>
+function rsNavToggle(){var n=document.getElementById('rsnav');n.classList.toggle('open');try{localStorage.setItem('rsnavOpen',n.classList.contains('open')?'1':'0')}catch(e){}}
+(function(){try{if(localStorage.getItem('rsnavOpen')==='1'){var n=document.getElementById('rsnav');if(n)n.classList.add('open');}}catch(e){}})();
+</script>
   <div class="wrap">
-    <div class="brand"><img src="img/logo.png" alt="" /><span>Central Apartments</span> <small>Панель команды</small></div>
-    <h1>Панель</h1>
+    <div class="brand"><img src="img/logo.png" alt="" /><span>Central Apartments</span> <small>Рабочий стол команды</small></div>
+    <h1>Рабочий стол</h1>
     <p class="lead">Всё для работы с гостями в одном месте. Открывайте нужный раздел — повторно вводить пароль не нужно.</p>
     <div class="grid">
       <a class="card" href="/inbox">
@@ -102,7 +120,7 @@
     </div>
     <pre id="out" class="out" hidden></pre>
   </div>
-  <footer><div class="wrap"><span>Central Apartments — внутренняя панель</span><a href="/">← на сайт</a></div></footer>
+  <footer><div class="wrap"><span>Central Apartments — внутренний рабочий стол</span><a href="/">← на сайт</a></div></footer>
 <script>
 const $=s=>document.querySelector(s);
 function renderStatus(d){

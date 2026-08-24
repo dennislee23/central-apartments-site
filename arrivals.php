@@ -4,7 +4,8 @@
 require __DIR__ . '/auth.php';  // cookie-session auth (sets $user/$pass for the Worker call)
 $base = 'https://roland-bot.hello-071.workers.dev';
 $isCheckin = isset($_GET['id']) && $_GET['id'] !== '';
-$WORKER = $isCheckin ? $base . '/arrivals/checkin?id=' . rawurlencode($_GET['id']) : $base . '/arrivals';
+$all = (isset($_GET['all']) && $_GET['all'] === '1') ? '?all=1' : '';
+$WORKER = $isCheckin ? $base . '/arrivals/checkin?id=' . rawurlencode($_GET['id']) : $base . '/arrivals' . $all;
 $body = false; $code = 0;
 if (function_exists('curl_init')) {
   $ch = curl_init($WORKER);
