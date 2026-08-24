@@ -34,6 +34,9 @@
 <Files "progress.php">
     Header always set X-Robots-Tag "noindex, nofollow"
 </Files>
+<Files "health.php">
+    Header always set X-Robots-Tag "noindex, nofollow"
+</Files>
 
 # Pretty URLs (admin hub + team guide static; inbox/learn/waiting proxy the worker)
 <IfModule mod_rewrite.c>
@@ -46,6 +49,7 @@
   RewriteRule ^arrivals/?$ arrivals.php [L]
   RewriteRule ^apartments/?$ apartments.php [L]
   RewriteRule ^progress/?$ progress.php [L]
+  RewriteRule ^health/?$ health.php [L]
   RewriteRule ^learn/act/?$ learn.php [L,QSA]
   RewriteRule ^learn/?$ learn.php [L,QSA]
 </IfModule>
