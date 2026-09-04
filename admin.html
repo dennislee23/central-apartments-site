@@ -63,7 +63,7 @@ body{padding-left:56px}
 .rsnav-i.on{background:#1E5B55;color:#fff;border-left-color:#C8743A}
 @media (max-width:640px){.rsnav:hover{width:56px}.rsnav.open{width:212px}}
 </style>
-<nav class="rsnav" id="rsnav"><button class="rsnav-burger" onclick="rsNavToggle()" aria-label="Меню">☰</button><a class="rsnav-i on" href="/admin"><span class="rsnav-ic">🏠</span><span class="rsnav-tx">Рабочий стол</span></a><a class="rsnav-i" href="/inbox"><span class="rsnav-ic">💬</span><span class="rsnav-tx">Диалоги</span></a><a class="rsnav-i" href="/waiting"><span class="rsnav-ic">⏳</span><span class="rsnav-tx">Ждут ответа</span></a><a class="rsnav-i" href="/arrivals"><span class="rsnav-ic">📅</span><span class="rsnav-tx">Заезды</span></a><a class="rsnav-i" href="/apartments"><span class="rsnav-ic">🏢</span><span class="rsnav-tx">Объекты</span></a><a class="rsnav-i" href="/learn"><span class="rsnav-ic">🎓</span><span class="rsnav-tx">Обучение</span></a><a class="rsnav-i" href="/ask"><span class="rsnav-ic">🤖</span><span class="rsnav-tx">Спросить бота</span></a></nav>
+<nav class="rsnav" id="rsnav"><button class="rsnav-burger" onclick="rsNavToggle()" aria-label="Меню">☰</button><a class="rsnav-i on" href="/admin"><span class="rsnav-ic">🏠</span><span class="rsnav-tx">Рабочий стол</span></a><a class="rsnav-i" href="/inbox"><span class="rsnav-ic">💬</span><span class="rsnav-tx">Диалоги</span></a><a class="rsnav-i" href="/waiting"><span class="rsnav-ic">⏳</span><span class="rsnav-tx">Ждут ответа</span></a><a class="rsnav-i" href="/arrivals"><span class="rsnav-ic">📅</span><span class="rsnav-tx">Заезды</span></a><a class="rsnav-i" href="/apartments"><span class="rsnav-ic">🏢</span><span class="rsnav-tx">Объекты</span></a><a class="rsnav-i" href="/learn"><span class="rsnav-ic">🎓</span><span class="rsnav-tx">Обучение</span></a><a class="rsnav-i" href="/reviews"><span class="rsnav-ic">⭐</span><span class="rsnav-tx">Отзывы</span></a><a class="rsnav-i" href="/ask"><span class="rsnav-ic">🤖</span><span class="rsnav-tx">Спросить бота</span></a></nav>
 <script>
 function rsNavToggle(){var n=document.getElementById('rsnav');n.classList.toggle('open');try{localStorage.setItem('rsnavOpen',n.classList.contains('open')?'1':'0')}catch(e){}}
 (function(){try{if(localStorage.getItem('rsnavOpen')==='1'){var n=document.getElementById('rsnav');if(n)n.classList.add('open');}}catch(e){}})();
@@ -83,6 +83,12 @@ function rsNavToggle(){var n=document.getElementById('rsnav');n.classList.toggle
         <div class="ic">🧠</div>
         <h2>Обучение бота</h2>
         <p>Факты, извлечённые из ответов команды. Одобрите — и бот начнёт отвечать на это сам.</p>
+        <span class="go">Открыть →</span>
+      </a>
+      <a class="card" href="/reviews">
+        <div class="ic">⭐</div>
+        <h2>Отзывы на Booking</h2>
+        <p>Бот пишет черновик ответа на языке гостя. Проверьте, поправьте — и вставьте в Booking.</p>
         <span class="go">Открыть →</span>
       </a>
       <a class="card" href="/team">
