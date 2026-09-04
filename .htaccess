@@ -56,6 +56,8 @@
   # fell through to /learn and learn.php sent it to the Worker's /learn/add, which
   # wants a rooms[] and answered 400 — so Save always showed "Ошибка" (04.09).
   RewriteRule ^learn/(edit|reject-note)/?$ learn.php?op=$1 [L,QSA]
+  RewriteRule ^reviews/(act|redraft)/?$ reviews.php?op=$1 [L,QSA]
+  RewriteRule ^reviews/?$ reviews.php [L,QSA]
   RewriteRule ^learn/?$ learn.php [L,QSA]
 </IfModule>
 
