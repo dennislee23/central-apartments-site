@@ -51,6 +51,11 @@
   RewriteRule ^progress/?$ progress.php [L]
   RewriteRule ^health/?$ health.php [L]
   RewriteRule ^learn/act/?$ learn.php [L,QSA]
+  # The review page also POSTs to /learn/edit (rewrite a fact) and
+  # /learn/reject-note (reject + supply the correct fact). Without these the POST
+  # fell through to /learn and learn.php sent it to the Worker's /learn/add, which
+  # wants a rooms[] and answered 400 — so Save always showed "Ошибка" (04.09).
+  RewriteRule ^learn/(edit|reject-note)/?$ learn.php?op=$1 [L,QSA]
   RewriteRule ^learn/?$ learn.php [L,QSA]
 </IfModule>
 

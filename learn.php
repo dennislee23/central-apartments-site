@@ -4,11 +4,22 @@
 // site's Basic Auth. We forward the team's credentials to the Worker.
 require __DIR__ . '/auth.php';  // cookie-session auth (sets $user/$pass for the Worker call)
 
-// POST = the "add info" form (-> /learn/add); /learn/act carries a 'do' param;
-// everything else is the page.
+// Which Worker route this request is for. POSTs carry either ?run=1 (distillation),
+// ?op=edit / ?op=reject-note (set by the .htaccess rewrites for those two paths), or
+// nothing at all, which is the "add info" form. GETs are the page itself, or /learn/act
+// when a 'do' param is present.
+//
+// The op allow-list is deliberate: $op is attacker-controlled, and pasting it into the
+// URL unchecked would let anyone behind the login reach any Worker route.
 $base = 'https://roland-bot.hello-071.workers.dev/learn';
 $isPost = ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST';
-$target = $isPost ? ($_GET['run'] ?? '') === '1' ? $base . '/run' : $base . '/add' : (isset($_GET['do']) ? $base . '/act' : $base);
+$op = $_GET['op'] ?? '';
+if (!in_array($op, ['edit', 'reject-note'], true)) $op = '';
+if ($isPost) {
+  $target = ($_GET['run'] ?? '') === '1' ? $base . '/run' : ($op !== '' ? $base . '/' . $op : $base . '/add');
+} else {
+  $target = isset($_GET['do']) ? $base . '/act' : $base;
+}
 $qs = $_SERVER['QUERY_STRING'] ?? '';
 if (!$isPost && $qs !== '') $target .= '?' . $qs;
 $postBody = $isPost ? file_get_contents('php://input') : '';
