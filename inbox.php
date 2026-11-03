@@ -6,9 +6,14 @@
 // credentials to the Worker, which also requires them.
 require __DIR__ . '/auth.php';  // cookie-session auth (sets $user/$pass for the Worker call)
 $base = 'https://roland-bot.hello-071.workers.dev';
-// /inbox -> the page; /inbox/tr?key=... -> RU translations; /inbox?archive=<key>&off=1|0 -> archive toggle (POST).
+// /inbox -> the page; /inbox/tr?key=... -> RU translations; /inbox?archive=<key>&off=1|0 -> archive toggle (POST);
+// /inbox?reply=<key> -> a reply to the guest typed in the conversation view (POST, JSON {text}).
 $isArchive = isset($_GET['archive']) && $_GET['archive'] !== '';
-if ($isArchive) {
+$isReply = isset($_GET['reply']) && $_GET['reply'] !== '' && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST';
+$replyBody = $isReply ? (string) file_get_contents('php://input') : '';
+if ($isReply) {
+  $WORKER = $base . '/inbox/reply?key=' . rawurlencode($_GET['reply']);
+} elseif ($isArchive) {
   $WORKER = $base . '/inbox/archive?key=' . rawurlencode($_GET['archive']) . '&off=' . rawurlencode($_GET['off'] ?? '1');
 } elseif (isset($_GET['tr'])) {
   $WORKER = $base . '/inbox/tr?key=' . urlencode($_GET['key'] ?? '');
@@ -21,6 +26,7 @@ if (function_exists('curl_init')) {
   $ch = curl_init($WORKER);
   $opt = [CURLOPT_RETURNTRANSFER => true, CURLOPT_HTTPHEADER => ['Authorization: Basic ' . base64_encode("$user:$pass")], CURLOPT_TIMEOUT => 30];
   if ($isArchive) { $opt[CURLOPT_POST] = true; $opt[CURLOPT_POSTFIELDS] = ''; }
+  if ($isReply) { $opt[CURLOPT_POST] = true; $opt[CURLOPT_POSTFIELDS] = $replyBody; $opt[CURLOPT_HTTPHEADER][] = 'Content-Type: application/json'; $opt[CURLOPT_TIMEOUT] = 60; }
   curl_setopt_array($ch, $opt);
   $body = curl_exec($ch);
   $code = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -28,13 +34,14 @@ if (function_exists('curl_init')) {
 } else {
   $http = ['header' => 'Authorization: Basic ' . base64_encode("$user:$pass") . "\r\n", 'timeout' => 30, 'ignore_errors' => true];
   if ($isArchive) { $http['method'] = 'POST'; $http['content'] = ''; }
+  if ($isReply) { $http['method'] = 'POST'; $http['content'] = $replyBody; $http['header'] .= "Content-Type: application/json\r\n"; $http['timeout'] = 60; }
   $ctx = stream_context_create(['http' => $http]);
   $body = @file_get_contents($WORKER, false, $ctx);
   if (isset($http_response_header[0]) && preg_match('/\s(\d{3})\s/', $http_response_header[0], $m)) $code = (int) $m[1];
 }
 
 http_response_code($code ?: 502);
-header('Content-Type: ' . ($isArchive ? 'application/json' : 'text/html') . '; charset=utf-8');
+header('Content-Type: ' . (($isArchive || $isReply) ? 'application/json' : 'text/html') . '; charset=utf-8');
 header('X-Robots-Tag: noindex, nofollow');
 header('Cache-Control: no-store');
-echo $body !== false ? $body : ($isArchive ? '{"error":"unavailable"}' : 'Inbox temporarily unavailable — try again in a moment.');
+echo $body !== false ? $body : (($isArchive || $isReply) ? '{"ok":false,"error":"send"}' : 'Inbox temporarily unavailable — try again in a moment.');
